@@ -14,11 +14,11 @@
 namespace derivation_of_flicks {
 
 template <int64_t measure>
-constexpr bool test_measure(const int64_t v) {
+bool test_measure(const int64_t v) {
   return (v % measure) == 0;
 }
 
-constexpr bool test(const int64_t v) {
+bool test(const int64_t v) {
   return
       // These are the image-frame-rate measures, all multiplied by 1000 for
       // reasonable room in simulation substeps

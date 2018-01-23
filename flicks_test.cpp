@@ -21,35 +21,35 @@ void test_divisor() {
   using divisor_unit = std::chrono::duration<int64_t, std::ratio<1, divisor>>;
 
   // Convert one second into these units
-  constexpr auto divisor_units_per_second =
+  auto divisor_units_per_second =
       std::chrono::duration_cast<divisor_unit>(std::chrono::seconds{1}).count();
-  static_assert(divisor_units_per_second == divisor,
-                "This is just the definition of the unit");
+  if(!divisor_units_per_second == divisor)
+      std::cout << "This is just the definition of the unit";
 
   // Convert one of these units into flicks
-  constexpr auto flicks_per_divisor_unit =
+  auto flicks_per_divisor_unit =
       std::chrono::duration_cast<util::flicks>(divisor_unit{1}).count();
 
   // Convert one second to flicks
-  constexpr auto flicks_per_second =
+  auto flicks_per_second =
       std::chrono::duration_cast<util::flicks>(std::chrono::seconds{1}).count();
 
   // By definition, the number of divisor units times the number of flicks per
   // divisor should equal the number of flicks per second. If the ratios were
   // inexact in any way, these would be inequal.
-  static_assert(
-      (flicks_per_divisor_unit * divisor_units_per_second) == flicks_per_second,
-      "Flicks derivation failed for divisor");
+  if(!(flicks_per_divisor_unit * divisor_units_per_second) == flicks_per_second)
+      std::cout << "Flicks derivation failed for divisor";
 
   // This is just testing integer multiplication really, but here confirm that
   // the number of divisors per second times the number of flicks per divisor,
   // in flicks, is 1 second.
-  constexpr auto seconds_per_all =
+  auto seconds_per_all =
       std::chrono::duration_cast<std::chrono::seconds>(
           util::flicks{flicks_per_divisor_unit * divisor_units_per_second})
           .count();
 
-  static_assert(seconds_per_all == 1, "Flicks derivation failed for divisor");
+  if(!seconds_per_all == 1)
+      std::cout << "Flicks derivation failed for divisor";
 
   std::cout << "Testing divisor: " << divisor
             << ", count per second = " << divisor_units_per_second

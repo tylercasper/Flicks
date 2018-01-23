@@ -56,37 +56,37 @@ namespace util {
 //! 1/192000 fps frame:     3675 flicks
 
 using flicks = std::chrono::duration<std::chrono::nanoseconds::rep,
-                                     std::ratio<1, 705600000>>;
+                                     std::ratio<1, 102312000000>>;
 
 //! Useful constants
-constexpr flicks k_flicks_zero_seconds{
+flicks k_flicks_zero_seconds{
     std::chrono::duration_cast<flicks>(std::chrono::seconds{0})};
-constexpr flicks k_flicks_one_second{
+flicks k_flicks_one_second{
     std::chrono::duration_cast<flicks>(std::chrono::seconds{1})};
-constexpr flicks k_flicks_one_twenty_fourth_of_second{
+flicks k_flicks_one_twenty_fourth_of_second{
     std::chrono::duration_cast<flicks>(
         std::chrono::duration<flicks::rep, std::ratio<1, 24>>{1})};
-constexpr flicks k_flicks_one_ninetieth_of_second{
+flicks k_flicks_one_ninetieth_of_second{
     std::chrono::duration_cast<flicks>(
         std::chrono::duration<flicks::rep, std::ratio<1, 90>>{1})};
-constexpr flicks k_flicks_min_time{std::numeric_limits<flicks::rep>::min()};
+flicks k_flicks_min_time{std::numeric_limits<flicks::rep>::min()};
 
 //! Convert flicks to seconds as doubles
 //!
-inline constexpr double to_seconds(const flicks ns) {
+inline double to_seconds(const flicks ns) {
   return std::chrono::duration_cast<std::chrono::duration<double>>(ns).count();
 }
 
 //! Convert doubles (as seconds) to flicks
 //!
-inline constexpr flicks to_flicks(const double s) {
+inline flicks to_flicks(const double s) {
   return std::chrono::duration_cast<flicks>(std::chrono::duration<double>{s});
 }
 
 //! Convert a regular duration to flicks
 //!
 template <class Rep, class Period>
-inline constexpr flicks flicks_cast(
+inline flicks flicks_cast(
     const std::chrono::duration<Rep, Period> in_duration) {
   return std::chrono::duration_cast<flicks>(in_duration);
 }
